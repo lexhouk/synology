@@ -1,0 +1,8 @@
+version: "2"
+
+services:
+  app:
+    image: chmez/synology
+    container_name: synoregrenamer
+    ports:
+      - 18119:80
