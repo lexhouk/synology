@@ -156,8 +156,8 @@ elseif (!$exit) {
         <div class="form-group col-sm-2">
           <label for="protocol">Protocol</label>
           <select name="protocol" class="form-control" required>
-            <option value="http" selected>HTTP</option>
-            <option value="https">HTTPS</option>
+            <option value="http">HTTP</option>
+            <option value="https" selected>HTTPS</option>
           </select>
         </div>
 
@@ -168,7 +168,7 @@ elseif (!$exit) {
 
         <div class="form-group col-sm-2">
           <label for="port">Port</label>
-          <input type="number" name="port" value="5000" min="0" max="65535" class="form-control" required />
+          <input type="number" name="port" value="5001" min="0" max="65535" placeholder="Eg.: 5001" class="form-control" required />
         </div>
       </div>
     </div>
@@ -179,7 +179,7 @@ elseif (!$exit) {
       <div class="card-body row">
         <div class="form-group col">
           <label for="username">Username</label>
-          <input type="text" name="username" value="" class="form-control" required />
+          <input type="text" name="username" value="" placeholder="Eg.: admin" class="form-control" required />
         </div>
 
         <div class="form-group col">
