@@ -88,12 +88,18 @@ function alert($message, $type = 'danger') { ?>
 $sid = NULL;
 
 if (!isset($_COOKIE['sid']) && isset($_POST['host'])) {
-  $response = request('auth', 'API.Auth', 3, 'login', [
+  $arguments = [
     'account' => $_POST['username'],
     'passwd' => $_POST['password'],
     'session' => 'FileStation',
     'format' => 'sid',
-  ]);
+  ];
+
+  if (isset($_POST['code'])) {
+    $arguments['otp_code'] = $_POST['code'];
+  }
+
+  $response = request('auth', 'API.Auth', 3, 'login', $arguments);
 
   if ($response->error) {
     alert($response->error . ': ' . $response->content);
@@ -179,6 +185,11 @@ elseif (!$exit) {
         <div class="form-group col">
           <label for="password">Password</label>
           <input type="password" name="password" value="" class="form-control" required />
+        </div>
+
+        <div class="form-group col">
+          <label for="password">OTP code</label>
+          <input type="number" name="code" value="" min="0" max="999999" placeholder="Eg.: 012345" autocomplete="off" class="form-control" />
         </div>
       </div>
     </div>
