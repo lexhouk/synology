@@ -20,7 +20,7 @@ ob_start();
 
 $server = [];
 $keys = ['protocol', 'host', 'port'];
-$exit = FALSE;
+$exit = $error = FALSE;
 
 if (isset($_POST['host'])) {
   foreach ($_POST as $key => $value) {
@@ -102,7 +102,7 @@ if (!isset($_COOKIE['sid']) && isset($_POST['host'])) {
   $response = request('auth', 'API.Auth', 3, 'login', $arguments);
 
   if ($response->error) {
-    alert($response->error . ': ' . $response->content);
+    $error = $response->error . ': ' . $response->content;
   }
   else {
     $response = json_decode($response->content);
@@ -111,7 +111,7 @@ if (!isset($_COOKIE['sid']) && isset($_POST['host'])) {
       setcookie('sid', $sid = $response->data->sid);
     }
     else {
-      alert(var_export($response, TRUE));
+      $error = var_export($response, TRUE);
     }
   }
 }
@@ -147,6 +147,8 @@ elseif (!$exit) {
     <h1 class="h2"><?php print NAME; ?></h1>
     <p class="lead mb-0"><?php print DESCRIPTION; ?></p>
   </div>
+
+  <?php if ($error) alert($error); ?>
 
   <form method="post" action="/">
     <div class="card form-group">
