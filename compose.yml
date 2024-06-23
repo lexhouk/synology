@@ -1,9 +1,6 @@
 services:
   app:
     image: chmez/synology
-    build: .
     container_name: synoregrenamer
     ports:
       - 18119:80
-    volumes:
-      - ./html:/var/www/html
